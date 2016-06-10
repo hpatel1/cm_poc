@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:ns0="FES.DigitalIntegrationServices" xmlns:ns1="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
+   <SOAP-ENV:Header/>
+   <ns1:Body>
+      <ns0:OrderSubmit>
+         <ns0:AppKey>{{ AppKey }}</ns0:AppKey>
+         <ns0:OrderManifest>
+            <ns0:OriginatorOrderID>{{ OriginatorOrderID }}</ns0:OriginatorOrderID>
+            <ns0:Summary>
+               <ns0:TotalTax>0.5</ns0:TotalTax>
+               <ns0:TotalPrice>22.5</ns0:TotalPrice>
+               <ns0:TotalItemPrice>20</ns0:TotalItemPrice>
+               <ns0:TotalShipping>2</ns0:TotalShipping>
+               <ns0:TotalHandling>0</ns0:TotalHandling>
+               <ns0:OwnerInfo>
+                  <ns0:FirstName>{{ FirstName }}</ns0:FirstName>
+                  <ns0:LastName>{{ LastName }}</ns0:LastName>
+                  <ns0:Phone>{{ Phone }}</ns0:Phone>
+                  <ns0:OrderUserTypeID>0</ns0:OrderUserTypeID>
+                  <ns0:OriginatorUserID>{{ OriginatorUserID }}</ns0:OriginatorUserID>
+               </ns0:OwnerInfo>
+            </ns0:Summary>
+            <ns0:AppKey>{{ AppKey }}</ns0:AppKey>
+            <ns0:OriginatorName>{{ OriginatorName }}</ns0:OriginatorName>
+            <ns0:CheckoutDate>{{ CheckoutDate }}</ns0:CheckoutDate>
+            <ns0:SubOrders>
+               <ns0:SubOrder>
+                  <ns0:Summary>
+                     <ns0:TotalTax>0.5</ns0:TotalTax>
+                     <ns0:TotalPrice>22.5</ns0:TotalPrice>
+                     <ns0:TotalItemPrice>20</ns0:TotalItemPrice>
+                     <ns0:TotalShipping>2</ns0:TotalShipping>
+                     <ns0:TotalHandling>0</ns0:TotalHandling>
+                     <ns0:OwnerInfo>
+                        <ns0:FirstName>{{ FirstName }}</ns0:FirstName>
+                        <ns0:LastName>{{ LastName }}</ns0:LastName>
+                        <ns0:Phone>{{ Phone }}</ns0:Phone>
+                        <ns0:OrderUserTypeID>0</ns0:OrderUserTypeID>
+                        <ns0:OriginatorUserID>23</ns0:OriginatorUserID>
+                     </ns0:OwnerInfo>
+                  </ns0:Summary>
+                  <ns0:OriginatorSubOrderID>{{ OriginatorSubOrderID }}</ns0:OriginatorSubOrderID>
+                  <ns0:CreateDate>2015-12-04T13:40:56-04:00</ns0:CreateDate>
+                  <ns0:FulfillerID>{{ FulfillerID }}</ns0:FulfillerID>
+                  <ns0:LineItems>
+                     <ns0:Pages>
+                        <ns0:PageNumber>1</ns0:PageNumber>
+                        <ns0:TemplateID>-1</ns0:TemplateID>
+                        <ns0:Regions>
+                           <ns0:MediaID>1</ns0:MediaID>
+                           <ns0:RegionType>IMAGE</ns0:RegionType>
+                           <ns0:RegionID>0</ns0:RegionID>
+                        </ns0:Regions>
+                     </ns0:Pages>
+                     <ns0:LineNumber>1</ns0:LineNumber>
+                     <ns0:PaymentInfoID>1</ns0:PaymentInfoID>
+                     <ns0:ItemType>1</ns0:ItemType>
+                     <ns0:ProductUPC>004746</ns0:ProductUPC>
+                     <ns0:ProductCode>PRGift;5471</ns0:ProductCode>
+                     <ns0:Quantity>1</ns0:Quantity>
+                     <ns0:UnitPrice>20</ns0:UnitPrice>
+                     <ns0:PromotedQuantity/>
+                     <ns0:PromotedUnitPrice/>
+                     <ns0:BaseUnitPrice/>
+                     <ns0:Tax/>
+                     <ns0:ShippingPrice/>
+                     <ns0:HandlingPrice/>
+                  </ns0:LineItems>
+                  <ns0:ShippingInfo>
+                     <ns0:FirstName>{{ FirstName }}</ns0:FirstName>
+                     <ns0:LastName>{{ LastName }}</ns0:LastName>
+                     <ns0:Address1>{{ Address1 }}</ns0:Address1>
+                     <ns0:Address2>{{ Address2 }}</ns0:Address2>
+                     <ns0:Address3>{{ Address3 }}</ns0:Address3>
+                     <ns0:City>{{ City }}</ns0:City>
+                     <ns0:State>{{ State }}</ns0:State>
+                     <ns0:PostalCode>{{ PostalCode }}</ns0:PostalCode>
+                     <ns0:Country>{{ Country }}</ns0:Country>
+                     <ns0:Phone>{{ Phone }}</ns0:Phone>
+                     <ns0:Email>{{ Email }}</ns0:Email>
+                     <ns0:ReadyText>You may pick up this order in 5-7 days.</ns0:ReadyText>
+                     <ns0:MethodCode>SD</ns0:MethodCode>
+                     <ns0:MethodName>Standard Delivery</ns0:MethodName>
+                  </ns0:ShippingInfo>
+                  <ns0:Payments>
+                    <ns0:PaymentInfo>
+                      <ns0:PaymentInfoID>1</ns0:PaymentInfoID>
+                      <ns0:CreditCardType>MASTERCARD</ns0:CreditCardType>
+                      <ns0:PaymentAmount>0</ns0:PaymentAmount>
+                      <ns0:PaymentMethodID>CC</ns0:PaymentMethodID>
+                      <ns0:PaymentMethodName>Credit Card</ns0:PaymentMethodName>
+                      <ns0:PaymentData>XXXXXXXXXXXX1111</ns0:PaymentData>
+                      <ns0:BillingInfo>
+                         <ns0:FirstName>{{ FirstName }}</ns0:FirstName>
+                         <ns0:LastName>{{ LastName }}</ns0:LastName>
+                         <ns0:Address1>{{ Address1 }}</ns0:Address1>
+                         <ns0:Address2>{{ Address2 }}</ns0:Address2>
+                         <ns0:Address3>{{ Address3 }}</ns0:Address3>
+                         <ns0:City>{{ City }}</ns0:City>
+                         <ns0:State>{{ State }}</ns0:State>
+                         <ns0:PostalCode>{{ PostalCode }}</ns0:PostalCode>
+                         <ns0:Country>{{ Country }}</ns0:Country>
+                         <ns0:Phone>{{ Phone }}</ns0:Phone>
+                         <ns0:Email>{{ Email }}</ns0:Email>
+                      </ns0:BillingInfo>
+                      <ns0:PaymentProperties/>
+                    </ns0:PaymentInfo>
+                  </ns0:Payments>
+               </ns0:SubOrder>
+            </ns0:SubOrders>
+            <ns0:FileList>
+              <ns0:MediaFile>
+                  <ns0:MediaID>1</ns0:MediaID>
+                  <ns0:MD5CheckSum>6e57ca75c2ad9e7a82a8fafee469b5c7</ns0:MD5CheckSum>
+                  <ns0:SourceType>URL</ns0:SourceType>
+                  <ns0:MediaFileName>image10</ns0:MediaFileName>
+                  <ns0:MediaFileType>RENDEREDPRODUCT</ns0:MediaFileType>
+                  <ns0:Source>http://webservices.fujifilmesys.com/venus/imagebank/image10.jpg</ns0:Source>
+              </ns0:MediaFile>
+             </ns0:FileList>
+         </ns0:OrderManifest>
+      </ns0:OrderSubmit>
+   </ns1:Body>
+</SOAP-ENV:Envelope>

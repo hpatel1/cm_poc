@@ -1,0 +1,34 @@
+{%  extends 'games/base.html' %}
+{% load staticfiles %}
+
+{%  block scripts %}
+    <script src="{% static 'js/ng/controllers/search_controller.js' %}"></script>
+{%  endblock scripts %}
+
+{% block content %}
+    {% verbatim %}
+    <div ng-app="searchPage" ng-controller="SearchPageController" ng-cloak="">
+        <div ng-click="goToHome()">
+            Home
+        </div>
+        <br/>
+        <div class="game-list">
+            <select
+                ng-change="selectGame()"
+                ng-model="selected_game"
+                ng-options="game as game.gdate for game in games">
+                <option>--Select Game--</option>
+            </select>
+        </div>
+        <div class="gallery-list">
+            <select
+                ng-model="selected_gallery"
+                ng-options="gallery as gallery.Barcode for gallery in galleries">
+                <option>--Select Gallery--</option>
+            </select>
+        </div>
+        <input type="button" ng-click="findPhotos()" value="Find">
+        </input>
+    </div>
+    {% endverbatim %}
+{% endblock content %}

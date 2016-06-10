@@ -1,0 +1,198 @@
+{% extends 'games/base.html' %}
+{% load staticfiles %}
+
+{%  block scripts %}
+<script src="{% static 'js/ng/controllers/home_controller.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/lib/jquery.ba-cond.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/lib/jquery.slitslider.js' %}"></script>
+{%  endblock scripts %}
+
+{% block content %}
+    {% verbatim %}
+    <div class="" ng-app="homePage" ng-controller="HomePageController" ng-cloak="" >
+        <div class="overlay" ng-show="overlay">
+       <div class="team-select-box" ng-show="team_box_selected">
+            <a class="close-team-selection" ng-click="close_box()">Close[X]</a>
+            <div class="u-cf"></div>
+            <h3>Which MLB team it was whos match you were at?</h3>
+            <div class="team-selection">    
+                <a class="open-gallery-box" ng-click="getDetails('CHC')">{% endverbatim %}<img src="{% static 'images/ccubs-logo.jpg' %}" alt="Chicago Cubs"></a>{% verbatim %}
+                <a class="open-gallery-box" ng-click="getDetails('BAL')">{% endverbatim %}<img src="{% static 'images/orioles-logo.jpg' %}" alt="Baltimore Orioles"></a>{% verbatim %}
+                <a class="open-gallery-box" ng-click="getDetails('TBR')">{% endverbatim %}<img src="{% static 'images/rays-logo.jpg' %}" alt="Tampa Bay Rays"></a>{% verbatim %}
+                <a class="open-gallery-box" ng-click="getDetails('BOS')">{% endverbatim %}<img src="{% static 'images/redsox-logo.jpg' %}" alt=" Boston Red Sox"></a>{% verbatim %}
+                <a class="open-gallery-box" ng-click="getDetails('KAN')">{% endverbatim %}<img src="{% static 'images/kc-royal-logo.jpg' %}" alt="Kansas City Royals"></a>{% verbatim %}
+                <a class="open-gallery-box" ng-click="getDetails('SFG')">{% endverbatim %}<img src="{% static 'images/gaints-logo.jpg' %}" alt="San Francisco Giants"></a>{% verbatim %}
+                <a class="open-gallery-box" ng-click="getDetails('LAA')">{% endverbatim %}<img src="{% static 'images/angels-logo.jpg' %}" alt="Los Angeles Angels"></a>{% verbatim %}
+            </div>
+        </div>
+        
+        <div class="team-gallery-box" ng-show="gallery_box_selected" ng-class="theme_class">
+            <a class="close-gallery-selection" ng-click="close_box()">Close[X]</a>
+            <div class="u-cf"></div>
+            <h3>Wow it was Angles, now just let us know,</h3>
+            <div class="team-gallery-box-selection">    
+                <label>the game</label>
+                <select
+                    ng-change="selectGame()"
+                    ng-model="selected_game"
+                    ng-options="game as game.gdate for game in games">
+                    <option value="?">Select the game</option>
+                </select>
+                <div class="u-cf"></div>
+                <div class="option-and">&amp;</div>
+                <div class="u-cf"></div>
+                <label>the gallery</label>
+                <select
+                    ng-change="findPhotos()"
+                    ng-model="selected_gallery"
+                    ng-options="gallery as gallery.Barcode for gallery in galleries">
+                    <option>Select the gallery</option>
+                </select>
+                <div class="u-cf"></div>
+                <div class="right text-right">(You can find it on your photocard which you would had got.)&nbsp;</div>
+            </div>
+            <div class="u-cf"></div>
+            <a class="switch-team" ng-click="switch_team()">Click here to switch back the team.</a>
+        </div>
+        
+    </div>
+    
+        <div class="container-slide demo-2">
+		
+		<div class="logo-home"><a href="photos.html">{% endverbatim %}<img src="{% static 'images/logo.png' %}" alt="MLB cashman Club"></a></div>{% verbatim %}
+
+            <div id="slider" class="sl-slider-wrapper">
+
+				<div class="sl-slider">
+				
+					<div class="sl-slide" data-orientation="horizontal" data-slice1-rotation="-25" data-slice2-rotation="-25" data-slice1-scale="2" data-slice2-scale="2">
+						<div class="sl-slide-inner">
+							<div class="bg-img bg-img-1"></div>
+							<h2>It was teds first Baseball game.</h2>							
+						</div>
+					</div>
+					
+					<div class="sl-slide" data-orientation="vertical" data-slice1-rotation="10" data-slice2-rotation="-15" data-slice1-scale="1.5" data-slice2-scale="1.5">
+						<div class="sl-slide-inner">
+							<div class="bg-img bg-img-2"></div>
+							<h2>Rose and Sarah ran the bases at angels</h2>							
+						</div>
+					</div>
+					
+					<div class="sl-slide" data-orientation="horizontal" data-slice1-rotation="3" data-slice2-rotation="3" data-slice1-scale="2" data-slice2-scale="1">
+						<div class="sl-slide-inner">
+							<div class="bg-img bg-img-3"></div>
+							<h2>Smith Family was cheering for KCRoyals</h2>							
+						</div>
+					</div>
+					
+				</div><!-- /sl-slider -->
+
+                <nav id="nav-arrows" class="nav-arrows">
+					<span class="nav-arrow-prev">Previous</span>
+					<span class="nav-arrow-next">Next</span>
+				</nav>
+
+                
+				<nav id="nav-dots" class="nav-dots">
+					<span class="nav-dot-current"></span>
+					<span></span>
+					<span></span>
+				</nav>
+
+			</div><!-- /slider-wrapper -->
+
+			
+    <div class="welcome-text">
+        <p class="message">The enjoyment and the moments spent with loving ones and keeping those joyous memories are the best way to bring smiles. Find your photos at the matches you were and make them memorable.</p>
+        <p class="find-memories-btn" ng-click="find_memories()"><a>Find Your Memories</a></p>
+    </div>
+
+    </div>
+    </div>
+<script type="text/javascript">
+
+    $(function() {
+
+    var Page = (function() {
+
+        var $navArrows = $( '#nav-arrows' ),
+        $nav = $( '#nav-dots > span' ),
+        slitslider = $( '#slider' ).slitslider( {
+            onBeforeChange : function( slide, pos ) {
+
+            $nav.removeClass( 'nav-dot-current' );
+            $nav.eq( pos ).addClass( 'nav-dot-current' );
+
+            }
+        } ),
+
+        init = function() {
+
+            initEvents();
+
+        },
+        initEvents = function() {
+
+            // add navigation events
+            $navArrows.children( ':last' ).on( 'click', function() {
+
+                slitslider.next();
+                return false;
+
+            } );
+
+            $navArrows.children( ':first' ).on( 'click', function() {
+
+                slitslider.previous();
+                return false;
+
+            } );
+
+            $nav.each( function( i ) {
+
+            $( this ).on( 'click', function( event ) {
+
+                var $dot = $( this );
+
+                if( !slitslider.isActive() ) {
+
+                    $nav.removeClass( 'nav-dot-current' );
+                    $dot.addClass( 'nav-dot-current' );
+
+                }
+
+                slitslider.jump( i + 1 );
+                return false;
+
+            } );
+
+            } );
+
+        };
+
+        return { init : init };
+
+        })();
+
+        Page.init();
+
+        /**
+        * Notes:
+        *
+        * example how to add items:
+        */
+
+        /*
+
+        var $items  = $('<div class="sl-slide sl-slide-color-2" data-orientation="horizontal" data-slice1-rotation="-5" data-slice2-rotation="10" data-slice1-scale="2" data-slice2-scale="1"><div class="sl-slide-inner bg-1"><div class="sl-deco" data-icon="t"></div><h2>some text</h2><blockquote><p>bla bla</p><cite>Margi Clarke</cite></blockquote></div></div>');
+
+        // call the plugin's add method
+        ss.add($items);
+
+        */
+
+    });
+</script>
+{% endverbatim %}
+{% endblock content %}

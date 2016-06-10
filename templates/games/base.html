@@ -1,0 +1,67 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <!-- Basic Page Needs -->
+  <meta charset="utf-8">
+  <title>MLB cashman || Home</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <!-- Mobile Specific Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+   <!-- FONT -->
+  
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="{% static 'css/normalize.css' %}">
+  <link rel="stylesheet" href="{% static 'css/skeleton.css' %}">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="{% static 'favicon.ico' %}">
+
+  <!-- Custom -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/demo.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/custom.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/font-awesome.css' %}">
+    <script type="text/javascript" src="{% static 'js/lib/modernizr.custom.79639.js' %}"></script>
+    <noscript>
+            <link rel="stylesheet" type="text/css" href="{% static 'css/styleNoJS.css' %}" />
+    </noscript>
+
+    <script src="{% static 'js/lib/jquery-2.1.4.min.js' %}"></script>
+    <script src="{% static 'js/lib/angular.min.js' %}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-sanitize.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-animate.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-touch.min.js"></script>
+    <script src="//code.angularjs.org/1.4.7/angular-route.min.js"></script>
+
+    <!--//<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular-sanitize.js"></script>-->
+
+    <script src="{% static 'js/lib/angular-lazy-img.min.js' %}"></script>
+    <script src="{% static 'js/lib/ng-infinite-scroll.min.js' %}"></script>
+    <script src="{% static 'js/lib/angular-local-storage.js' %}"></script>
+
+    <!--for custom select -->
+    <script>
+	angular.module('ui.filters', []);// This is needed in order to use the format filter
+    </script>
+
+    <script src="{% static 'js/lib/format.js' %}"></script>
+    <script src="{% static 'js/lib/customSelect.js' %}"></script>
+
+    <script src="{% static 'js/lib/ui-bootstrap-tpls-0.14.2.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'js/ng/app.js' %}"></script>
+    {%  block scripts %}
+    {%  endblock scripts %}
+
+</head>
+<body class="{% block body_class %}{% endblock body_class %}">
+    {%  block header %}
+    {%  endblock header %}
+    {%  block content %}
+    {%  endblock content %}
+    {%  block footer %}
+    {%  endblock footer %}
+</body>
+</html>
