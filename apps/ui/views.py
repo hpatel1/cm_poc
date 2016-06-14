@@ -1,4 +1,4 @@
-﻿from django.core.urlresolvers import reverse
+from django.core.urlresolvers import reverse
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
@@ -21,6 +21,7 @@ import uuid
 import requests
 
 from catalog.models import *
+from venue.models import *
 
 def home(request):
     return render(request,
@@ -116,7 +117,8 @@ def doUpload(request):
 
 def displayAll(request):
     images = Images.objects.all()
-    return render(request, 'cashman/displayAll.html',{'images':images})
+    categories = Category.objects.all()
+    return render(request, 'cashman/displayAll.html',{'images':images,'categories':categories})
 
 
 class ImageListAPIView(generics.ListCreateAPIView):
