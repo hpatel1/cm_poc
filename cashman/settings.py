@@ -44,8 +44,13 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
 
     # Custom Applications
-    'api',
-    'ui'
+    # 'api',
+    'ui',
+    'venue',
+    'catalog',
+    'rest_framework',
+
+    'versatileimagefield',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -106,4 +111,8 @@ STATICFILES_DIRS = [
 TEMPLATE_DIRS = (
     os.path.join(BASE_DIR,  'templates'),
     os.path.join(BASE_DIR,  'templates/games'),
+    
 )
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
