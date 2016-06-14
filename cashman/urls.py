@@ -26,13 +26,13 @@ urlpatterns += patterns('',
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 )
 
-urlpatterns += [
-	url(r'^api/',
-		include([
-			url(r'^catalog/', include('catalog.urls')),
-			url(r'^venue/', include('venue.urls')),
-		], namespace='rest_apis')
-	),
-]
+# urlpatterns += [
+# 	url(r'^api/',
+# 		include([
+# 			url(r'^catalog/', include('catalog.urls')),
+# 			url(r'^venue/', include('venue.urls')),
+# 		], namespace='rest_apis')
+# 	),
+# ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

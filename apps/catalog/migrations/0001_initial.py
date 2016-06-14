@@ -8,7 +8,6 @@ import versatileimagefield.fields
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('venue', '0001_initial'),
     ]
 
     operations = [
@@ -22,7 +21,6 @@ class Migration(migrations.Migration):
                 ('created_at', models.DateTimeField(help_text=b'Date when category created.', verbose_name=b'Created At', auto_now_add=True)),
                 ('updated_at', models.DateTimeField(help_text=b'Date when category updated.', verbose_name=b'Updated At', auto_now=True)),
                 ('ppoi', versatileimagefield.fields.PPOIField(default='0.5x0.5', verbose_name=b'Image PPOI', max_length=20, editable=False)),
-                ('category', models.ForeignKey(to='venue.Category')),
             ],
         ),
     ]
