@@ -113,7 +113,7 @@ def doUpload(request):
         i = Images(image = request.FILES['file'])
         i.save()
 
-    return displayAll()
+    return displayAll(request)
 
 def displayAll(request):
     images = Images.objects.all()
