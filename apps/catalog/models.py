@@ -23,10 +23,10 @@ class Images(models.Model):
     )
 
         
-    # category = models.ForeignKey(Category)
+    category = models.ForeignKey(Category, null=True, blank=True, related_name='images')
     created_at = models.DateTimeField(verbose_name=_('Created At'),
-        auto_now_add=True, help_text=_("Date when image created."))
+        auto_now_add=True, help_text=_("Date when category created."))
     updated_at = models.DateTimeField(verbose_name=_('Updated At'),
-        auto_now=True, help_text=_("Date when image updated."))
+        auto_now=True, help_text=_("Date when category updated."))
     ppoi = PPOIField(
         'Image PPOI')

@@ -1,21 +1,19 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.db import models, migrations
+from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('venue', '0001_initial'),
         ('catalog', '0001_initial'),
     ]
 
     operations = [
-        migrations.AddField(
+        migrations.AlterField(
             model_name='images',
             name='category',
-            field=models.ForeignKey(default='', to='venue.Category'),
-            preserve_default=False,
+            field=models.ForeignKey(related_name='images', blank=True, to='venue.Category', null=True),
         ),
     ]
