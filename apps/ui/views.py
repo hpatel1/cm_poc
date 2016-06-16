@@ -110,13 +110,8 @@ def doUpload(request):
         f = request.FILES['file']        
         i = Images(image = request.FILES['file'])
         i.save()
-<<<<<<< d82ec62a94f81d079b0b30eb25b9de6cefd82101
-        
-    return displayAll(request)
-=======
 
-    return displayAll(request)    
->>>>>>> new changes with searchPhotos.html
+    return displayAll(request)
 
 def displayAll(request):
     images = Images.objects.all()
