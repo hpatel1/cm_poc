@@ -22,6 +22,7 @@ urlpatterns += patterns('',
     url(r'^cashman/', include('ui.urls')),
     url(r'^doUpload/',doUpload, name="file upload"),
     url(r'^displayAll/', displayAll, name="display all"),
+    url(r'^searchPhotos/', searchPhotos, name="search photos"),
     url(r'^$', RedirectView.as_view(url='/cashman'), name='go-to-cashman'),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 )

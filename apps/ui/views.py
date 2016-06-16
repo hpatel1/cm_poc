@@ -99,8 +99,6 @@ def products(request):
     else:
         reverse('cashman_photos')
 
-
-
     return HttpResponse(selected_photos)
     return render(request,
                   template_name='edit.html')
@@ -113,13 +111,21 @@ def doUpload(request):
         i = Images(image = request.FILES['file'])
         i.save()
 
+<<<<<<< 0c1b1ddadb49880573026d1bda94802137ebb9aa
     return displayAll(request)
+=======
+    return displayAll(request)    
+>>>>>>> searchPhotos.html added
 
 def displayAll(request):
     images = Images.objects.all()
     categories = Category.objects.all()
     return render(request, 'cashman/displayAll.html',{'images':images,'categories':categories})
 
+def searchPhotos(request):
+    images = Images.objects.all()
+    categories = Category.objects.all()
+    return render(request, 'cashman/searchPhotos.html',{'photos':images,'categories':categories})
 
 class ImageListAPIView(generics.ListCreateAPIView):
     queryset = Images.objects.all()
