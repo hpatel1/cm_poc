@@ -33,13 +33,6 @@
     <script src="{% static 'js/jquery-2.1.4.js' %}"></script>
     <script src="{% static 'js/bootstrap.js' %}"></script>
     <script src="{% static 'js/bootstrap-multiselect.js' %}"></script>
-    <script src="{% static 'js/angular.js' %}"></script>
-    <script src="{% static 'js/angular-local-storage.js' %}"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-sanitize.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-animate.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-touch.min.js"></script>
-    <script src="//code.angularjs.org/1.4.7/angular-route.min.js"></script>
-
     
     {%  block scripts %}
     {%  endblock scripts %}
