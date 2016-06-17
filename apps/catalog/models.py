@@ -30,3 +30,6 @@ class Images(models.Model):
         auto_now=True, help_text=_("Date when category updated."))
     ppoi = PPOIField(
         'Image PPOI')
+
+    def __unicode__(self):
+        return "%s - %s" %(self.id, self.image)

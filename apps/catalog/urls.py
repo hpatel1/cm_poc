@@ -3,5 +3,5 @@ from catalog import views
 
 urlpatterns = [
     url(r'^images/', views.ImagesView.as_view(), name="images"),
-    url(r'^set-category/', views.set_category, name="set_category"),
+    url(r'^setCategory/', views.set_category, name="set_category"),
 ]

@@ -8,32 +8,32 @@ from ui.views import *
 
 from ui import views as ui_views
 
-urlpatterns = patterns('',
+urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
-)
+]
 
 
 if 'api' in configurations.SERVER_TYPE:
-    urlpatterns += patterns('',
+    urlpatterns += [
 #        url(r'^api/', include('api.urls')),
-    )
+    ]
 
-urlpatterns += patterns('',
+urlpatterns += [
+    url(r'^$', RedirectView.as_view(url='/cashman'), name='go-to-cashman'),
     url(r'^cashman/', include('ui.urls')),
     url(r'^doUpload/',doUpload, name="file upload"),
     url(r'^displayAll/', displayAll, name="display all"),
-    url(r'^searchPhotos/', searchPhotos, name="search photos"),
-    url(r'^$', RedirectView.as_view(url='/cashman'), name='go-to-cashman'),
+	url(r'^searchPhotos/', searchPhotos, name="search photos"),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-)
+]
 
-# urlpatterns += [
-# 	url(r'^api/',
-# 		include([
-# 			url(r'^catalog/', include('catalog.urls')),
-# 			url(r'^venue/', include('venue.urls')),
-# 		], namespace='rest_apis')
-# 	),
-# ]
+urlpatterns += [
+ 	url(r'^api/',
+ 		include([
+ 			url(r'^catalog/', include('catalog.urls')),
+ 			#url(r'^venue/', include('venue.urls')),
+ 		], namespace='rest_apis')
+ 	),
+ ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -2,8 +2,14 @@ from rest_framework import serializers
 from catalog.models import *
 from versatileimagefield.serializers import VersatileImageFieldSerializer
 from venue.serializers import CategorySerializer
+from cashman.serializers import DynamicModelSerializer
 
-class ImageSerializer(serializers.Serializer):
+class ImageSerializer(DynamicModelSerializer):
+
+    def __init__(self, *args, **kwargs):
+        many = kwargs.pop('many', True)
+        super(ImageSerializer, self).__init__(many=many, *args, **kwargs)
+
     image = VersatileImageFieldSerializer(
         sizes=[
             ('full_size', 'url'),
@@ -12,8 +18,13 @@ class ImageSerializer(serializers.Serializer):
             ('small_square_crop', 'crop__50x50')
         ]
     )
-    category = CategorySerializer()
-    
+        
     class Meta:
         model = Images
         fields = ['id', 'image', 'category']
+
+    def update(self, instance, validated_data):
+        return instance.update(
+            image=validated_data.get('image', instance.image),
+            category=validated_data.get('category', instance.category)
+        )
