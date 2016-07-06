@@ -1,4 +1,4 @@
-﻿from rest_framework import mixins, status
+from rest_framework import mixins, status
 from rest_framework.generics import GenericAPIView
 from django.utils import timezone
 from rest_framework.response import Response

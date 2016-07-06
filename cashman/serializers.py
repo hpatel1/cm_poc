@@ -1,4 +1,4 @@
-﻿from rest_framework import serializers
+from rest_framework import serializers
 from django.contrib.contenttypes.models import ContentType
 
 class DynamicFieldsModelSerializer(serializers.ModelSerializer):

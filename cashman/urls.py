@@ -1,39 +1,28 @@
-from django.conf.urls import patterns, include, url
+﻿from rest_framework import routers
 from django.contrib import admin
-from cashman import settings
+
+from authentication.views import AccountViewSet, LoginView, LogoutView
+from django.conf.urls import url, include
 from django.conf.urls.static import static
-from django.views.generic.base import RedirectView
-import configurations
-from ui.views import *
+from cashman.views import IndexView
+from catalog.views import ImageViewSet, SetCategory
+from cashman import settings
+from venue.views import CategoryViewSet
 
-from ui import views as ui_views
+router = routers.SimpleRouter()
+router.register(r'accounts', AccountViewSet)
+router.register(r'catalog', ImageViewSet)
+router.register(r'category', CategoryViewSet)
 
-urlpatterns = [
+urlpatterns = static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+urlpatterns += [
     url(r'^admin/', include(admin.site.urls)),
+
+    url(r'^api/v1/catalog/setCategory/$', SetCategory.as_view(), name='set-category'),
+    url(r'^api/v1/', include(router.urls)),
+    url(r'^api/v1/auth/login/$', LoginView.as_view(), name='login'),
+    url(r'^api/v1/auth/logout/$', LogoutView.as_view(), name='logout'),
+
+    url('^.*$', IndexView.as_view(), name='index'),
 ]
-
-
-if 'api' in configurations.SERVER_TYPE:
-    urlpatterns += [
-#        url(r'^api/', include('api.urls')),
-    ]
-
-urlpatterns += [
-    url(r'^$', RedirectView.as_view(url='/cashman'), name='go-to-cashman'),
-    url(r'^cashman/', include('ui.urls')),
-    url(r'^doUpload/',doUpload, name="file upload"),
-    url(r'^displayAll/', displayAll, name="display all"),
-	url(r'^searchPhotos/', searchPhotos, name="search photos"),
-    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-]
-
-urlpatterns += [
- 	url(r'^api/',
- 		include([
- 			url(r'^catalog/', include('catalog.urls')),
- 			#url(r'^venue/', include('venue.urls')),
- 		], namespace='rest_apis')
- 	),
- ]
-
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

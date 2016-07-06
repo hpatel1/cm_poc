@@ -1,43 +1,48 @@
-from django.shortcuts import render
-from rest_framework import generics, status
-from rest_framework.exceptions import NotFound, ValidationError
-from serializers import *
 from catalog.models import Images
-from cashman.generics import GenericView
-from rest_framework.response import Response
-from rest_framework.parsers import FileUploadParser
-from django.views.decorators.csrf import csrf_exempt
-from django.http.response import HttpResponse
+from rest_framework import viewsets, permissions, status, filters
+from catalog.serializers import ImageSerializer
 from rest_framework.views import APIView
+from venue.models import Category
+from rest_framework.exceptions import NotFound
+from rest_framework.response import Response
+from django.db.models.query_utils import Q
+import django_filters
 
 
-class ImagesView(generics.ListCreateAPIView):
+class ImageFilter(django_filters.FilterSet):
+    venue = django_filters.CharFilter(name="category__venue")
+    category = django_filters.MethodFilter(action='multi_category_filter')
+
+    class Meta:
+        model = Images
+        fields = ['category', 'venue']
+
+    def multi_category_filter(self, queryset, value):
+        return queryset.filter(category__id__in = value.split(','))
+
+class ImageViewSet(viewsets.ModelViewSet):
+    queryset = Images.objects.categorized().order_by('-created_at')
     serializer_class = ImageSerializer
-    queryset = Images.objects.all()
-    api_view = ['POST', 'GET']
+    filter_backends = (filters.DjangoFilterBackend,)
+    filter_class = ImageFilter
 
-    def post(self, request, *args, **kwargs):
-        serializer = ImageSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-        
-        return Response({'stat':'success'}, status=status.HTTP_200_OK)
+    def get_permissions(self):
+        if self.request.method in permissions.SAFE_METHODS:
+            return (permissions.AllowAny(),)
+        return (permissions.IsAuthenticated(),)
 
-    def get_object(self):
-        if self.request.method == 'GET':
-            id = self.request.query_params.get('id', None)
+    def get_queryset(self):
+        if self.request.query_params.get('type', None) == 'uncategorized':
+            return Images.objects.uncategorized().order_by('-created_at')
         else:
-            id = self.request.data.get('id',None)
-        try:
-            return Images.objects.get(id=id)
-        except Images.DoesNotExist:
-            raise NotFound("Requested image is not found")
+            return Images.objects.categorized().order_by('-created_at')        
 
 
 class SetCategory(APIView):
-    serializer_class = ImageSerializer
-    queryset = Images.objects.all()
-    api_view = ['POST', 'GET']
+    def get_permissions(self):
+        if self.request.method in permissions.SAFE_METHODS:
+            return (permissions.AllowAny(),)
+        return (permissions.IsAuthenticated(),)
 
     def post(self, request):
         return self.set_category(request)
@@ -52,11 +57,9 @@ class SetCategory(APIView):
             raise NotFound("Please provide valid category id")
 
         if request.data.get('images', None):
-            for image in Images.objects.filter(id__in = request.POST['images'].split(',')):
+            for image in Images.objects.filter(id__in = request.data.get('images').split(',')):
                 image.category = category
                 image.save()
             return Response({'stat':'success'}, status=status.HTTP_200_OK)
         else:
             raise NotFound("No images are found.")
-
-set_category = SetCategory.as_view()

@@ -1,15 +1,10 @@
-from rest_framework import serializers
+﻿from rest_framework import serializers
 from catalog.models import *
 from versatileimagefield.serializers import VersatileImageFieldSerializer
 from venue.serializers import CategorySerializer
 from cashman.serializers import DynamicModelSerializer
 
 class ImageSerializer(DynamicModelSerializer):
-
-    def __init__(self, *args, **kwargs):
-        many = kwargs.pop('many', True)
-        super(ImageSerializer, self).__init__(many=many, *args, **kwargs)
-
     image = VersatileImageFieldSerializer(
         sizes=[
             ('full_size', 'url'),
@@ -18,13 +13,23 @@ class ImageSerializer(DynamicModelSerializer):
             ('small_square_crop', 'crop__50x50')
         ]
     )
+    category = CategorySerializer(read_only=True, required=False)
+    name = serializers.SerializerMethodField(read_only=True)
         
     class Meta:
         model = Images
-        fields = ['id', 'image', 'category']
+        fields = ['id', 'image', 'category', 'name']
 
-    def update(self, instance, validated_data):
-        return instance.update(
-            image=validated_data.get('image', instance.image),
-            category=validated_data.get('category', instance.category)
-        )
+    def get_name(self, obj):
+        return obj.image.name
+
+    def get_validation_exclusions(self, *args, **kwargs):
+        exclusions = super(ImageSerializer, self).get_validation_exclusions()
+
+        return exclusions + ['category']
+
+    #def update(self, instance, validated_data):
+    #    return instance.update(
+    #        image=validated_data.get('image', instance.image),
+    #        category=validated_data.get('category', instance.category)
+    #    )
