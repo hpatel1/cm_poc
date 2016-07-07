@@ -15,6 +15,9 @@ class Venue(models.Model):
         verbose_name = 'Venue'
         verbose_name_plural = 'Venues'
 
+    def __unicode__(self):
+        return self.name
+
 
 class Category(models.Model):
     name = models.CharField(verbose_name=_('Category Name'), max_length=100, help_text=_('Cateogry name'))
@@ -29,3 +32,6 @@ class Category(models.Model):
     class Meta:
         verbose_name = 'Category'
         verbose_name_plural = 'Categories'
+
+    def __unicode__(self):
+        return self.name
